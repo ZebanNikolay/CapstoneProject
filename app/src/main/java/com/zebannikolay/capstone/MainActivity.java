@@ -1,18 +1,17 @@
 package com.zebannikolay.capstone;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
                 switch (item.getItemId()) {
-                    case R.id.navigation_home:
+                    case R.id.navigation_search:
+                        return true;
+                    case R.id.navigation_recent:
                         return true;
                     case R.id.navigation_favorite:
                         return true;

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Capstone Project</string>
-    <string name="title_home">Home</string>
-    <string name="title_favorite">Favorite</string>
+    <string name="search_hint">Search board games</string>
+
+    <string name="nav_bottom_title_search">Search</string>
+    <string name="nav_bottom_title_recent">Recent</string>
+    <string name="nav_bottom_title_favorite">Favorite</string>
 </resources>
