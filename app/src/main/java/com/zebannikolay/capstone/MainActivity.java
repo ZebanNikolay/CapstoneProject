@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.zebannikolay.capstone.core.adapters.ScreenSlidePagerAdapter;
 import com.zebannikolay.capstone.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;

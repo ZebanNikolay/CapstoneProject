@@ -1,4 +1,4 @@
-package com.zebannikolay.capstone;
+package com.zebannikolay.capstone.core.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
