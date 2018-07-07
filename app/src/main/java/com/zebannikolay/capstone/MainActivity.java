@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private void initBottomNavigation() {
         ArrayList<Fragment> fragments = new ArrayList<>(3);
+        fragments.add(new GamesListFragment());
         binding.viewPager.setAdapter(new ScreenSlidePagerAdapter(getSupportFragmentManager(), fragments));
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener(this);

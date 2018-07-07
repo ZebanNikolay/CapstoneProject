@@ -3,13 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="game"
+            type="com.zebannikolay.capstone.domain.models.BoardGamePreview"/>
+        <variable
+            name="handler"
+            type="com.zebannikolay.capstone.BoardGamesPreviewRecyclerViewAdapter"/>
+    </data>
+
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="200dp"
-            android:layout_height="200dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/image"
