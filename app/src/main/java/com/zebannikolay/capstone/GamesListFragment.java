@@ -7,8 +7,9 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.zebannikolay.capstone.core.adapters.BoardGamesPreviewRecyclerViewAdapter;
+import com.zebannikolay.capstone.core.adapters.UniversalRecyclerAdapter;
 import com.zebannikolay.capstone.databinding.FragmentGamesListBinding;
 import com.zebannikolay.capstone.domain.models.BoardGamePreview;
 
@@ -39,8 +40,12 @@ public final class GamesListFragment extends Fragment {
         binding.list.setLayoutManager(sglm);
 
         List<BoardGamePreview> gamePreviews = new ArrayList<>();
-        binding.list.setAdapter(new BoardGamesPreviewRecyclerViewAdapter(gamePreviews, game -> {
-
+        gamePreviews.add(new BoardGamePreview("dsfdsfs"));
+        gamePreviews.add(new BoardGamePreview("ddddd"));
+        gamePreviews.add(new BoardGamePreview("kjkkkkk"));
+        gamePreviews.add(new BoardGamePreview("rrrrrr"));
+        binding.list.setAdapter(new UniversalRecyclerAdapter<>(gamePreviews, game -> {
+            Toast.makeText(getContext(), game.getTitle(), Toast.LENGTH_SHORT).show();
         }));
     }
 
