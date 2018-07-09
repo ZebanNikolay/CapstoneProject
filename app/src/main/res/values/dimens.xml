@@ -1,8 +1,8 @@
 <resources>
-    <dimen name="horizontal_margin">@dimen/spacing_normal</dimen>
+    <dimen name="horizontal_margin">@dimen/spacing_small</dimen>
     <dimen name="vertical_margin">@dimen/spacing_normal</dimen>
 
-    <dimen name="font_larger">22sp</dimen>
+    <dimen name="font_larger">24sp</dimen>
     <dimen name="font_large">18sp</dimen>
     <dimen name="font_normal">15sp</dimen>
     <dimen name="font_small">12sp</dimen>
@@ -20,4 +20,5 @@
 
     <dimen name="icon_normal">24dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="card_spacing">@dimen/spacing_small</dimen>
 </resources>

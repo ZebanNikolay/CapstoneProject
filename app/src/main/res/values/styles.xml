@@ -8,9 +8,22 @@
     </style>
 
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="elevation">4dp</item>
+        <item name="elevation">0dp</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="layout_scrollFlags">scroll|enterAlways</item>
+    </style>
 
+    <style name="AppTheme.CardView" parent="CardView.Light">
+        <item name="cardElevation">1dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="android:layout_margin">@dimen/card_spacing</item>
+    </style>
+
+    <style name="AppTheme.ImageButton" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_margin">@dimen/card_spacing</item>
+        <item name="android:tint">@color/primaryDarkColor</item>
+        <item name="android:padding">@dimen/spacing_tiny</item>
+        <item name="android:minWidth">0dp</item>
     </style>
 
 </resources>

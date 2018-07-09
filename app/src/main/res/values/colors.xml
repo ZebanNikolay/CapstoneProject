@@ -10,8 +10,12 @@
     <color name="secondaryColor">#ffff8d</color>
     <color name="secondaryLightColor">#ffffbf</color>
     <color name="secondaryDarkColor">#cacc5d</color>
+
     <color name="primaryTextColor">@color/white</color>
     <color name="secondaryTextColor">@color/black</color>
+
+    <color name="background">@color/white</color>
+    <color name="surface">@color/white</color>
 
     <color name="colorIcon">@color/white</color>
 

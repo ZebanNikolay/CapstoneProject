@@ -55,8 +55,8 @@ public class UniversalRecyclerAdapter<E> extends RecyclerView.Adapter<UniversalR
             this.binding = binding;
         }
 
-        private void bindView(E item){
-            binding.setVariable(BR.data, item);
+        private void bindView(@NonNull final E item){
+            binding.setVariable(BR.item, item);
             binding.setVariable(BR.handler, listener);
         }
     }
