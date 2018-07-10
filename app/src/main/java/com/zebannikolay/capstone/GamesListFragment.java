@@ -49,7 +49,7 @@ public final class GamesListFragment extends Fragment {
         gamePreviews.add(new BoardGamePreview("Monopoly", "http://i.imgur.com/DvpvklR.png"));
         gamePreviews.add(new BoardGamePreview("Monopoly", "http://i.imgur.com/DvpvklR.png"));
         gamePreviews.add(new BoardGamePreview("Monopoly", "http://i.imgur.com/DvpvklR.png"));
-        binding.list.setAdapter(new UniversalRecyclerAdapter<>(gamePreviews, game -> {
+        binding.list.setAdapter(new UniversalRecyclerAdapter<>(gamePreviews, R.layout.item_board_game, game -> {
             Toast.makeText(getContext(), game.getTitle(), Toast.LENGTH_SHORT).show();
         }));
     }

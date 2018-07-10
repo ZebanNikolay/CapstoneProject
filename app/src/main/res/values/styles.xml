@@ -8,7 +8,6 @@
     </style>
 
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="elevation">0dp</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="layout_scrollFlags">scroll|enterAlways</item>
     </style>
