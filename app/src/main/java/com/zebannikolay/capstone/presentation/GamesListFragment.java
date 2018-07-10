@@ -1,4 +1,4 @@
-package com.zebannikolay.capstone;
+package com.zebannikolay.capstone.presentation;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.zebannikolay.capstone.R;
 import com.zebannikolay.capstone.core.adapters.UniversalRecyclerAdapter;
 import com.zebannikolay.capstone.databinding.FragmentGamesListBinding;
 import com.zebannikolay.capstone.domain.models.BoardGamePreview;

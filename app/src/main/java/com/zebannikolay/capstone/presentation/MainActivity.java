@@ -1,4 +1,4 @@
-package com.zebannikolay.capstone;
+package com.zebannikolay.capstone.presentation;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.zebannikolay.capstone.R;
 import com.zebannikolay.capstone.core.adapters.ScreenSlidePagerAdapter;
 import com.zebannikolay.capstone.databinding.ActivityMainBinding;
+import com.zebannikolay.capstone.presentation.GamesListFragment;
 
 import java.util.ArrayList;
 
