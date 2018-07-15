@@ -21,6 +21,6 @@
     <dimen name="icon_normal">24dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="card_spacing">@dimen/spacing_small</dimen>
-    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="app_bar_height">220dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -41,7 +41,7 @@ public final class GamesListFragment extends Fragment {
         binding.list.setLayoutManager(sglm);
 
         List<BoardGamePreview> gamePreviews = new ArrayList<>();
-        gamePreviews.add(new BoardGamePreview("Monopoly", "http://i.imgur.com/DvpvklR.png"));
+        gamePreviews.add(new BoardGamePreview("Monopoly", getString(R.string.fake_url)));
         gamePreviews.add(new BoardGamePreview("Monopoly", "http://i.imgur.com/DvpvklR.png"));
         gamePreviews.add(new BoardGamePreview("Monopoly", "http://i.imgur.com/DvpvklR.png"));
         gamePreviews.add(new BoardGamePreview("Monopoly", "http://i.imgur.com/DvpvklR.png"));
