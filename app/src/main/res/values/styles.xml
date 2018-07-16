@@ -16,6 +16,7 @@
         <item name="cardElevation">1dp</item>
         <item name="cardCornerRadius">4dp</item>
         <item name="android:layout_margin">@dimen/card_spacing</item>
+        <item name="android:background">@color/surface</item>
     </style>
 
     <style name="AppTheme.ImageButton" parent="@style/Widget.AppCompat.Button.Borderless">

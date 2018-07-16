@@ -13,12 +13,15 @@
 
     <color name="primaryTextColor">@color/white</color>
     <color name="secondaryTextColor">@color/black</color>
+    <color name="secondaryLightTextColor">@color/gray</color>
 
-    <color name="background">@color/white</color>
+    <color name="background">#e5e5e5</color>
     <color name="surface">@color/white</color>
 
     <color name="colorIcon">@color/white</color>
 
     <color name="black">@android:color/black</color>
+    <color name="black_10">#10000000</color>
+    <color name="gray">#99000000</color>
     <color name="white">@android:color/white</color>
 </resources>

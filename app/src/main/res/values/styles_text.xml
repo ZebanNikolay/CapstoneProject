@@ -6,6 +6,9 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
+    <style name="AppTheme.TextAppearance.Body" >
+        <item name="android:textColor">@color/secondaryLightTextColor</item>
+    </style>
 
     <style name="AppTheme.TextAppearance.Caption" >
         <item name="android:textSize">@dimen/font_small</item>
