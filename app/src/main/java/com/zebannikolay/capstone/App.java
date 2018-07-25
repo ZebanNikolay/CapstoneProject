@@ -2,11 +2,15 @@ package com.zebannikolay.capstone;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.zebannikolay.capstone.core.di.AppComponent;
 import com.zebannikolay.capstone.core.di.ContextModule;
 import com.zebannikolay.capstone.core.di.DaggerAppComponent;
 
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public final class App extends Application {
@@ -17,9 +21,19 @@ public final class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        final Fabric fabric = new Fabric.Builder(this)
+                .kits(new Crashlytics())
+                .debuggable(true)
+                .build();
+        Fabric.with(fabric);
+
         if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
+//            Timber.plant(new Timber.DebugTree());
+            Timber.plant(new CrashReportingTree());
+        } else {
+            Timber.plant(new CrashReportingTree());
         }
+        Timber.e(new RuntimeException("timber test"));
 
     }
 
@@ -39,4 +53,21 @@ public final class App extends Application {
         return appComponent;
     }
 
+
+    private static final class CrashReportingTree extends Timber.Tree {
+
+        @Override
+        protected void log(final int priority, final String tag, @NonNull final String message, final Throwable t) {
+            if (priority == Log.VERBOSE || priority == Log.DEBUG) {
+                return;
+            }
+
+            Crashlytics.log(priority, tag, message);
+
+            if (t != null) {
+                Crashlytics.logException(t);
+            }
+        }
+
+    }
 }
