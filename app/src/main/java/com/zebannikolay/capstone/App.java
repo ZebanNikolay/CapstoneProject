@@ -6,9 +6,18 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.zebannikolay.capstone.core.di.AppComponent;
 import com.zebannikolay.capstone.core.di.ContextModule;
 import com.zebannikolay.capstone.core.di.DaggerAppComponent;
+import com.zebannikolay.capstone.data.BoardGameRepository;
+import com.zebannikolay.capstone.data.remote.BoardGamesDataSource;
+import com.zebannikolay.capstone.data.remote.BoardGamesDataSourceImpl;
+import com.zebannikolay.capstone.domain.models.BoardGame;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -21,20 +30,39 @@ public final class App extends Application {
     public void onCreate() {
         super.onCreate();
 
+        initCrashlytics();
+
+        initLoger();
+
+        List<BoardGame> games = new ArrayList<>(5);
+
+        games.add(new BoardGame("title", "rules", "url", null));
+        games.add(new BoardGame("title", "rules", "url", null));
+        games.add(new BoardGame("title", "rules", "url", null));
+        games.add(new BoardGame("title", "rules", "url", null));
+        games.add(new BoardGame("title", "rules", "url", null));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("board_games");
+        BoardGamesDataSource dataSource = new BoardGamesDataSourceImpl(myRef);
+        BoardGameRepository repository = new BoardGameRepository(dataSource, null);
+
+    }
+
+    private void initCrashlytics() {
         final Fabric fabric = new Fabric.Builder(this)
                 .kits(new Crashlytics())
                 .debuggable(true)
                 .build();
         Fabric.with(fabric);
+    }
 
+    private void initLoger() {
         if (BuildConfig.DEBUG) {
-//            Timber.plant(new Timber.DebugTree());
-            Timber.plant(new CrashReportingTree());
+            Timber.plant(new Timber.DebugTree());
         } else {
             Timber.plant(new CrashReportingTree());
         }
-        Timber.e(new RuntimeException("timber test"));
-
     }
 
     private AppComponent buildComponents() {
@@ -61,13 +89,10 @@ public final class App extends Application {
             if (priority == Log.VERBOSE || priority == Log.DEBUG) {
                 return;
             }
-
             Crashlytics.log(priority, tag, message);
-
             if (t != null) {
                 Crashlytics.logException(t);
             }
         }
-
     }
 }
