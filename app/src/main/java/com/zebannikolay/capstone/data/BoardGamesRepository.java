@@ -12,12 +12,12 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-public final class BoardGameRepository implements BoardGamesDataSource, FavoriteBoardGamesDataSource {
+public final class BoardGamesRepository implements BoardGamesDataSource, FavoriteBoardGamesDataSource {
 
     private final BoardGamesDataSource boardGamesDataSource;
     private final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource;
 
-    public BoardGameRepository(@NonNull final BoardGamesDataSource boardGamesDataSource, @NonNull final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource) {
+    public BoardGamesRepository(@NonNull final BoardGamesDataSource boardGamesDataSource, @NonNull final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource) {
         this.boardGamesDataSource = boardGamesDataSource;
         this.favoriteBoardGamesDataSource = favoriteBoardGamesDataSource;
     }

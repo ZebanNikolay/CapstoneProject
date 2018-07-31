@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.database.DatabaseReference;
@@ -12,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.zebannikolay.capstone.core.di.AppComponent;
 import com.zebannikolay.capstone.core.di.ContextModule;
 import com.zebannikolay.capstone.core.di.DaggerAppComponent;
-import com.zebannikolay.capstone.data.BoardGameRepository;
+import com.zebannikolay.capstone.data.BoardGamesRepository;
 import com.zebannikolay.capstone.data.remote.BoardGamesDataSource;
 import com.zebannikolay.capstone.data.remote.BoardGamesDataSourceImpl;
 import com.zebannikolay.capstone.domain.BoardGamesInteractor;
@@ -48,7 +47,7 @@ public final class App extends Application {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("board_games");
         BoardGamesDataSource dataSource = new BoardGamesDataSourceImpl(myRef);
-        BoardGameRepository repository = new BoardGameRepository(dataSource, null);
+        BoardGamesRepository repository = new BoardGamesRepository(dataSource, null);
         BoardGamesInteractor interactor = new BoardGamesInteractorImpl(repository);
 
     }

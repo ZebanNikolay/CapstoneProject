@@ -2,7 +2,7 @@ package com.zebannikolay.capstone.domain;
 
 import android.support.annotation.NonNull;
 
-import com.zebannikolay.capstone.data.BoardGameRepository;
+import com.zebannikolay.capstone.data.BoardGamesRepository;
 import com.zebannikolay.capstone.domain.models.BoardGame;
 import com.zebannikolay.capstone.domain.models.BoardGamePreview;
 
@@ -16,9 +16,9 @@ import io.reactivex.Single;
 
 public final class BoardGamesInteractorImpl implements BoardGamesInteractor {
 
-    private final BoardGameRepository repository;
+    private final BoardGamesRepository repository;
 
-    public BoardGamesInteractorImpl(@NonNull final BoardGameRepository repository) {
+    public BoardGamesInteractorImpl(@NonNull final BoardGamesRepository repository) {
         this.repository = repository;
     }
 
