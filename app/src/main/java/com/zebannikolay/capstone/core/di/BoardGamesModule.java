@@ -11,6 +11,7 @@ import com.zebannikolay.capstone.data.remote.BoardGamesDataSource;
 import com.zebannikolay.capstone.data.remote.BoardGamesDataSourceImpl;
 import com.zebannikolay.capstone.domain.BoardGamesInteractor;
 import com.zebannikolay.capstone.domain.BoardGamesInteractorImpl;
+import com.zebannikolay.capstone.presentation.GamesListViewModel;
 
 import javax.inject.Singleton;
 
@@ -21,6 +22,12 @@ import dagger.Provides;
 public class BoardGamesModule {
 
     private static final String BOARD_GAMES_DATABASE_REFERENCE = "board_games";
+
+    @Singleton
+    @Provides
+    public GamesListViewModel provideGamesListViewModel(@NonNull final BoardGamesInteractor interactor) {
+        return new GamesListViewModel(interactor);
+    }
 
     @Singleton
     @Provides

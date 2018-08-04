@@ -28,6 +28,11 @@ public final class BoardGamesRepository implements BoardGamesDataSource, Favorit
     }
 
     @Override
+    public Single<BoardGame> favoriteGame(@NonNull String id) {
+        return favoriteBoardGamesDataSource.favoriteGame(id);
+    }
+
+    @Override
     public Completable addFavoriteGame(@NonNull final BoardGame game) {
         return favoriteBoardGamesDataSource.addFavoriteGame(game);
     }

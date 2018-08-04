@@ -6,20 +6,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.zebannikolay.capstone.core.di.AppComponent;
 import com.zebannikolay.capstone.core.di.ContextModule;
 import com.zebannikolay.capstone.core.di.DaggerAppComponent;
-import com.zebannikolay.capstone.data.BoardGamesRepository;
-import com.zebannikolay.capstone.data.remote.BoardGamesDataSource;
-import com.zebannikolay.capstone.data.remote.BoardGamesDataSourceImpl;
-import com.zebannikolay.capstone.domain.BoardGamesInteractor;
-import com.zebannikolay.capstone.domain.BoardGamesInteractorImpl;
-import com.zebannikolay.capstone.domain.models.BoardGame;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
@@ -35,21 +24,6 @@ public final class App extends Application {
         initCrashlytics();
 
         initLoger();
-
-        List<BoardGame> games = new ArrayList<>(5);
-
-        games.add(new BoardGame("title", "rules", "url", null));
-        games.add(new BoardGame("title", "rules", "url", null));
-        games.add(new BoardGame("title", "rules", "url", null));
-        games.add(new BoardGame("title", "rules", "url", null));
-        games.add(new BoardGame("title", "rules", "url", null));
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("board_games");
-        BoardGamesDataSource dataSource = new BoardGamesDataSourceImpl(myRef);
-        BoardGamesRepository repository = new BoardGamesRepository(dataSource, null);
-        BoardGamesInteractor interactor = new BoardGamesInteractorImpl(repository);
-
     }
 
     private void initCrashlytics() {

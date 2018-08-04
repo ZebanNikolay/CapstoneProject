@@ -11,19 +11,25 @@ public final class BoardGame {
 
     @NonNull private String title;
 
-    @NonNull private String rules;
+    @NonNull private String summary;
+
+    @NonNull private String rulesUrl;
 
     @NonNull private String imageUrl;
 
     @Nullable private String videoUrl;
 
-    public BoardGame() {
-    }
+    public BoardGame() {}
 
-    public BoardGame(@NonNull final String title, @NonNull final String rules, @NonNull final String  imageUrl, @Nullable final String  videoUrl) {
+    public BoardGame(@NonNull final String title,
+                     @NonNull final String summary,
+                     @NonNull final String rulesUrl,
+                     @NonNull final String  imageUrl,
+                     @Nullable final String  videoUrl) {
+        this.summary = summary;
         this.id = UUID.randomUUID().toString();
         this.title = title;
-        this.rules = rules;
+        this.rulesUrl = rulesUrl;
         this.imageUrl = imageUrl;
         this.videoUrl = videoUrl;
     }
@@ -39,8 +45,13 @@ public final class BoardGame {
     }
 
     @NonNull
-    public String getRules() {
-        return rules;
+    public String getSummary() {
+        return summary;
+    }
+
+    @NonNull
+    public String getRulesUrl() {
+        return rulesUrl;
     }
 
     @NonNull
