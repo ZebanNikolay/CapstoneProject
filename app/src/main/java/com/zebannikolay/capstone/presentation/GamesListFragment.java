@@ -14,6 +14,7 @@ import com.zebannikolay.capstone.App;
 import com.zebannikolay.capstone.R;
 import com.zebannikolay.capstone.core.adapters.UniversalRecyclerAdapter;
 import com.zebannikolay.capstone.databinding.FragmentGamesListBinding;
+import com.zebannikolay.capstone.domain.BoardGamesInteractor;
 import com.zebannikolay.capstone.domain.models.BoardGamePreview;
 
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ public final class GamesListFragment extends Fragment implements SwipeRefreshLay
 
     private FragmentGamesListBinding binding;
 
-    @Inject GamesListViewModel viewModel;
+    @Inject BoardGamesInteractor interactor;
+    private GamesListViewModel viewModel;
     private UniversalRecyclerAdapter<BoardGamePreview> adapter;
 
     public GamesListFragment() {}
@@ -33,6 +35,7 @@ public final class GamesListFragment extends Fragment implements SwipeRefreshLay
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         App.getAppComponent().inject(this);
+        viewModel = new GamesListViewModel(interactor);
 
         binding = FragmentGamesListBinding.inflate(inflater, container, false);
         binding.swipeRefresh.setOnRefreshListener(this);
@@ -67,13 +70,13 @@ public final class GamesListFragment extends Fragment implements SwipeRefreshLay
         binding.list.setLayoutManager(sglm);
 
         adapter = new UniversalRecyclerAdapter<>(new ArrayList<>(), R.layout.item_board_game, game ->
-            GameDetailActivity.start(requireActivity(), game.getId())
+            GameDetailsActivity.start(requireActivity(), game.getId())
         );
         binding.list.setAdapter(adapter);
     }
 
     @Override
     public void onRefresh() {
-        viewModel.uploadGamesPreviews();
+        viewModel.fetchGamesPreviews();
     }
 }

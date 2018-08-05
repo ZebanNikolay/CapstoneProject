@@ -29,7 +29,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".presentation.GameDetailActivity"
+            android:name=".presentation.GameDetailsActivity"
             android:label=""
             android:parentActivityName=".presentation.MainActivity"
             android:theme="@style/AppTheme">

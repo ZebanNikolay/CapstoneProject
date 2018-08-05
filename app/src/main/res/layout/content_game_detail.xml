@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/activity_game_detail">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zebannikolay.capstone.presentation.GameDetailsViewModel"/>
+    </data>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,33 +36,17 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:padding="@dimen/spacing_large"
-                        android:text="@string/label_review"
+                        android:text="@string/label_summary"
                         android:textAppearance="@style/AppTheme.TextAppearance.H5"/>
 
                     <include layout="@layout/separator"/>
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
+                    <TextView
                         android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
                         android:padding="@dimen/spacing_large"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <ImageView
-                            android:id="@+id/video_thumbnail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:scaleType="centerCrop"
-                            app:imageUrl="@{@string/fake_url}"
-                            tools:src="@tools:sample/avatars"/>
-
-                        <ImageView
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:src="@drawable/ic_play_circle"
-                            android:tint="@color/colorAccent"
-                            android:layout_gravity="center"/>
-                    </FrameLayout>
+                        android:text="@{viewModel.game.summary}"
+                        android:textAppearance="@style/AppTheme.TextAppearance.Body"/>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -75,17 +65,67 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:padding="@dimen/spacing_large"
-                        android:text="@string/label_description"
+                        android:text="@string/label_rules"
                         android:textAppearance="@style/AppTheme.TextAppearance.H5"/>
 
                     <include layout="@layout/separator"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/download_rules"
+                        android:layout_margin="@dimen/spacing_large"
+                        android:drawableStart="@drawable/ic_file_download"
+                        android:drawablePadding="@dimen/spacing_small"
+                        style="@style/Widget.AppCompat.Button"
+                        android:onClick="@{() -> viewModel.onDownloadRules(viewModel.game.rulesUrl)}"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/AppTheme.CardView"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:visible="@{viewModel.game.videoUrl != null}">
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:padding="@dimen/spacing_large"
-                        android:text="@string/large_text"
-                        android:textAppearance="@style/AppTheme.TextAppearance.Body"/>
+                        android:text="@string/label_review"
+                        android:textAppearance="@style/AppTheme.TextAppearance.H5"/>
+
+                    <include layout="@layout/separator"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/spacing_large"
+                        android:onClick="@{() -> viewModel.onPlayReview(viewModel.game.videoUrl)}"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:id="@+id/video_thumbnail"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/youtoube_thumb_height"
+                            android:scaleType="centerCrop"
+                            app:youtubeImage="@{viewModel.game.videoUrl}"
+                            tools:src="@tools:sample/avatars"/>
+
+                        <ImageView
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:src="@drawable/ic_play_circle"
+                            android:tint="@color/colorAccent"
+                            android:layout_gravity="center"/>
+                    </FrameLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>

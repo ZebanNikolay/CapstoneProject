@@ -19,6 +19,8 @@ public final class BoardGame {
 
     @Nullable private String videoUrl;
 
+    private boolean favorite;
+
     public BoardGame() {}
 
     public BoardGame(@NonNull final String title,
@@ -62,5 +64,13 @@ public final class BoardGame {
     @Nullable
     public String getVideoUrl() {
         return videoUrl;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

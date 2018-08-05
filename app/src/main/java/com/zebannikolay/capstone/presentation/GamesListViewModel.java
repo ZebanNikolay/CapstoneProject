@@ -21,11 +21,11 @@ public final class GamesListViewModel {
 
     public GamesListViewModel(@NonNull final BoardGamesInteractor interactor) {
         this.interactor = interactor;
-        uploadGamesPreviews();
+        fetchGamesPreviews();
     }
 
     @SuppressLint("CheckResult")
-    public void uploadGamesPreviews() {
+    public void fetchGamesPreviews() {
         uiState.setValue(UiState.LOADING);
         interactor.gamesPreviews()
                 .subscribe(list -> {

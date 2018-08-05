@@ -23,4 +23,5 @@
     <dimen name="card_spacing">@dimen/spacing_small</dimen>
     <dimen name="app_bar_height">220dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="youtoube_thumb_height">160dp</dimen>
 </resources>

@@ -25,12 +25,6 @@ public class BoardGamesModule {
 
     @Singleton
     @Provides
-    public GamesListViewModel provideGamesListViewModel(@NonNull final BoardGamesInteractor interactor) {
-        return new GamesListViewModel(interactor);
-    }
-
-    @Singleton
-    @Provides
     public BoardGamesInteractor provideBoardGamesInteractor(@NonNull final BoardGamesRepository repository) {
         return new BoardGamesInteractorImpl(repository);
     }

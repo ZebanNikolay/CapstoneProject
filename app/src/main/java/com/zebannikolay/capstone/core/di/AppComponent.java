@@ -1,5 +1,6 @@
 package com.zebannikolay.capstone.core.di;
 
+import com.zebannikolay.capstone.presentation.GameDetailsActivity;
 import com.zebannikolay.capstone.presentation.GamesListFragment;
 
 import javax.inject.Singleton;
@@ -14,5 +15,6 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(GamesListFragment gamesListFragment);
+    void inject(GameDetailsActivity gameDetailsActivity);
 
 }
