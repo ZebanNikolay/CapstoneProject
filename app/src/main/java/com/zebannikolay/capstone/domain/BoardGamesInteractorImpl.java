@@ -40,6 +40,12 @@ public final class BoardGamesInteractorImpl implements BoardGamesInteractor {
                 .zipWith(repository.favoriteGames(), this::convertBoardGame);
     }
 
+    @Override
+    public Single<List<BoardGamePreview>> favoriteGamesPreviews() {
+        return repository.favoriteGames()
+                .map(this::convertBoardGame);
+    }
+
     private List<BoardGamePreview> convertBoardGame(@NonNull final Map<String, BoardGame> allGames,
                                                     @NonNull final List<BoardGame> favoriteGames) {
         final List<BoardGamePreview> result = new ArrayList<>(allGames.size());
@@ -50,6 +56,14 @@ public final class BoardGamesInteractorImpl implements BoardGamesInteractor {
         }
         for (BoardGame game : new ArrayList<>(allGames.values())) {
             result.add(new BoardGamePreview(game.getId(), game.getTitle(), game.getImageUrl(), false));
+        }
+        return result;
+    }
+
+    private List<BoardGamePreview> convertBoardGame(@NonNull final List<BoardGame> favoriteGames) {
+        final List<BoardGamePreview> result = new ArrayList<>(favoriteGames.size());
+        for (BoardGame game : favoriteGames) {
+            result.add(new BoardGamePreview(game.getId(), game.getTitle(), game.getImageUrl(), true));
         }
         return result;
     }

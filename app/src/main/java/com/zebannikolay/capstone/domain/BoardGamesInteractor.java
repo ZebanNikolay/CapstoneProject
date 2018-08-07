@@ -18,6 +18,8 @@ public interface BoardGamesInteractor {
 
     Single<List<BoardGamePreview>> gamesPreviews();
 
+    Single<List<BoardGamePreview>> favoriteGamesPreviews();
+
     Completable addGames(@NonNull final List<BoardGame> games);
 
     Completable addFavoriteGame(@NonNull final BoardGame game);

@@ -16,6 +16,7 @@ public class BindingAdapters {
 
     @BindingAdapter({"imageUrl"})
     public static void setImageUrl(@NonNull final ImageView view, @NonNull final String imageUrl) {
+        view.setImageDrawable(null);
         final StorageReference loadRef = FirebaseStorage.getInstance().getReference().child("images/" + imageUrl);
         loadRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> Picasso.get().load(uri.toString()).into(view))

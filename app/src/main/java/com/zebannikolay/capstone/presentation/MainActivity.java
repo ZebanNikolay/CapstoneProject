@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         ArrayList<Fragment> fragments = new ArrayList<>(3);
         fragments.add(new GamesListFragment());
         fragments.add(new GamesListFragment());
-        fragments.add(new GamesListFragment());
+        fragments.add(new FavoriteGamesListFragment());
         binding.viewPager.setAdapter(new ScreenSlidePagerAdapter(getSupportFragmentManager(), fragments));
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener(this);
