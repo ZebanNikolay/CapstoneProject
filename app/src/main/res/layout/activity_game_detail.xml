@@ -86,7 +86,7 @@
             android:tint="@color/secondaryTextColor"
             app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="bottom|end"
-            android:src="@{viewModel.game.isFavorite ? @drawable/ic_favorite : @drawable/ic_favorite_border}" />
+            android:src="@{viewModel.isFavorite() ? @drawable/ic_favorite : @drawable/ic_favorite_border}" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

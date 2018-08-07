@@ -18,4 +18,6 @@ public interface FavoriteBoardGamesDataSource {
 
     Completable addFavoriteGame(@NonNull final BoardGame game);
 
+    Completable deleteFavoriteGame(@NonNull final BoardGame game);
+
 }

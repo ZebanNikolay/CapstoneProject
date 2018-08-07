@@ -38,6 +38,11 @@ public final class BoardGamesRepository implements BoardGamesDataSource, Favorit
     }
 
     @Override
+    public Completable deleteFavoriteGame(@NonNull final BoardGame game) {
+        return favoriteBoardGamesDataSource.deleteFavoriteGame(game);
+    }
+
+    @Override
     public Single<BoardGame> game(@NonNull final String id) {
         return boardGamesDataSource.game(id);
     }
@@ -51,4 +56,10 @@ public final class BoardGamesRepository implements BoardGamesDataSource, Favorit
     public Completable addGames(@NonNull final HashMap<String, BoardGame> games) {
         return boardGamesDataSource.addGames(games);
     }
+
+    public Single<Boolean> isFavorite(@NonNull final String id) {
+        return favoriteBoardGamesDataSource.favoriteGame(id)
+                .map(game -> game != null);
+    }
+
 }

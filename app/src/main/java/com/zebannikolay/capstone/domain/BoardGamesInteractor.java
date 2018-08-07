@@ -20,4 +20,10 @@ public interface BoardGamesInteractor {
 
     Completable addGames(@NonNull final List<BoardGame> games);
 
+    Completable addFavoriteGame(@NonNull final BoardGame game);
+
+    Completable deleteFavoriteGame(@NonNull final BoardGame game);
+
+    Single<Boolean> isFavorite(@NonNull final String id);
+
 }

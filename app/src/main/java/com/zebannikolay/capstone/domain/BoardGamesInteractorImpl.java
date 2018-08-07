@@ -23,7 +23,7 @@ public final class BoardGamesInteractorImpl implements BoardGamesInteractor {
     }
 
     @Override
-    public Single<BoardGame> game(@NonNull String id) {
+    public Single<BoardGame> game(@NonNull final String id) {
         return repository.game(id);
     }
 
@@ -46,11 +46,26 @@ public final class BoardGamesInteractorImpl implements BoardGamesInteractor {
     }
 
     @Override
-    public Completable addGames(@NonNull List<BoardGame> games) {
+    public Completable addGames(@NonNull final List<BoardGame> games) {
         final HashMap<String, BoardGame> gamesMap = new HashMap<>(games.size());
         for (BoardGame game : games) {
             gamesMap.put(game.getId(), game);
         }
         return repository.addGames(gamesMap);
+    }
+
+    @Override
+    public Completable addFavoriteGame(@NonNull final BoardGame game) {
+        return repository.addFavoriteGame(game);
+    }
+
+    @Override
+    public Completable deleteFavoriteGame(@NonNull final BoardGame game) {
+        return repository.deleteFavoriteGame(game);
+    }
+
+    @Override
+    public Single<Boolean> isFavorite(@NonNull final String id) {
+        return repository.isFavorite(id);
     }
 }

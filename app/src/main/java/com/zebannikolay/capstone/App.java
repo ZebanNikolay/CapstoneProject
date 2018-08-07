@@ -44,7 +44,7 @@ public final class App extends Application {
 
     private AppComponent buildComponents() {
         return DaggerAppComponent.builder()
-                .contextModule(new ContextModule(getApplicationContext()))
+                .contextModule(new ContextModule(this))
                 .build();
     }
 

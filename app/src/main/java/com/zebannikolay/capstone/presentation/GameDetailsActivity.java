@@ -39,7 +39,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_detail);
         App.getAppComponent().inject(this);
-        viewModel = new GameDetailsViewModel(interactor);
+        viewModel = new GameDetailsViewModel(interactor, getGameId());
         binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);
 
@@ -47,8 +47,6 @@ public class GameDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         subscribeViewModel();
-
-        viewModel.fetchGame(getGameId());
     }
 
     private void subscribeViewModel() {
