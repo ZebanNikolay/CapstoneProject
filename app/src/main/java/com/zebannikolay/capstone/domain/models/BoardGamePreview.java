@@ -9,10 +9,11 @@ public final class BoardGamePreview {
     private final String imageUrl;
     private boolean favorite;
 
-    public BoardGamePreview(@NonNull final String id, @NonNull final String title, @NonNull final String imageUrl) {
+    public BoardGamePreview(@NonNull final String id, @NonNull final String title, @NonNull final String imageUrl, final boolean favorite) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
+        this.favorite = favorite;
     }
 
     public String getId() {
@@ -29,10 +30,6 @@ public final class BoardGamePreview {
 
     public boolean isFavorite() {
         return favorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
     }
 
 }

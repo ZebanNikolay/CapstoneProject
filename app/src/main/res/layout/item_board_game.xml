@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
-            type="com.zebannikolay.capstone.domain.models.BoardGamePreview"/>
+            type="com.zebannikolay.capstone.domain.models.BoardGamePreview" />
+
         <variable
             name="handler"
-            type="com.zebannikolay.capstone.core.adapters.UniversalRecyclerAdapter.OnItemClickListener"/>
+            type="com.zebannikolay.capstone.core.adapters.UniversalRecyclerAdapter.OnItemClickListener" />
     </data>
 
     <android.support.v7.widget.CardView
+        style="@style/AppTheme.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/AppTheme.CardView"
         android:onClick="@{() -> handler.onClick(item)}">
 
         <android.support.constraint.ConstraintLayout
@@ -27,9 +29,9 @@
                 android:id="@+id/image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:contentDescription="@{item.title}"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{item.imageUrl}"
-                android:contentDescription="@{item.title}"
                 app:layout_constraintDimensionRatio="4:3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_small"
-                android:src="@drawable/ic_favorite"
+                android:src="@{item.favorite ? @drawable/ic_favorite : @drawable/ic_favorite_border}"
                 app:layout_constraintBottom_toBottomOf="@+id/title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/title"

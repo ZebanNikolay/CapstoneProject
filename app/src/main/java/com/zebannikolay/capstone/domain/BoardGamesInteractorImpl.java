@@ -9,6 +9,7 @@ import com.zebannikolay.capstone.domain.models.BoardGamePreview;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -35,14 +36,22 @@ public final class BoardGamesInteractorImpl implements BoardGamesInteractor {
 
     @Override
     public Single<List<BoardGamePreview>> gamesPreviews() {
-        return games()
-                .flatMapObservable(Observable::fromIterable)
-                .map(this::convertBoardGame)
-                .toList();
+        return repository.games()
+                .zipWith(repository.favoriteGames(), this::convertBoardGame);
     }
 
-    private BoardGamePreview convertBoardGame(@NonNull final BoardGame game) {
-        return new BoardGamePreview(game.getId(), game.getTitle(), game.getImageUrl());
+    private List<BoardGamePreview> convertBoardGame(@NonNull final Map<String, BoardGame> allGames,
+                                                    @NonNull final List<BoardGame> favoriteGames) {
+        final List<BoardGamePreview> result = new ArrayList<>(allGames.size());
+        for (BoardGame favoriteGame : favoriteGames) {
+            final BoardGame game = allGames.get(favoriteGame.getId());
+            result.add(new BoardGamePreview(game.getId(), game.getTitle(), game.getImageUrl(), true));
+            allGames.remove(favoriteGame.getId());
+        }
+        for (BoardGame game : new ArrayList<>(allGames.values())) {
+            result.add(new BoardGamePreview(game.getId(), game.getTitle(), game.getImageUrl(), false));
+        }
+        return result;
     }
 
     @Override
