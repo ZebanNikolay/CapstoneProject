@@ -3,8 +3,10 @@ package com.zebannikolay.capstone.data;
 import android.support.annotation.NonNull;
 
 import com.zebannikolay.capstone.data.local.FavoriteBoardGamesDataSource;
+import com.zebannikolay.capstone.data.local.RecentBoardGamesDataSource;
 import com.zebannikolay.capstone.data.remote.BoardGamesDataSource;
 import com.zebannikolay.capstone.domain.models.BoardGame;
+import com.zebannikolay.capstone.domain.models.RecentBoardGame;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,13 +14,17 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-public final class BoardGamesRepository implements BoardGamesDataSource, FavoriteBoardGamesDataSource {
+public final class BoardGamesRepository implements BoardGamesDataSource, FavoriteBoardGamesDataSource, RecentBoardGamesDataSource {
 
     private final BoardGamesDataSource boardGamesDataSource;
+    private final RecentBoardGamesDataSource recentBoardGamesDataSource;
     private final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource;
 
-    public BoardGamesRepository(@NonNull final BoardGamesDataSource boardGamesDataSource, @NonNull final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource) {
+    public BoardGamesRepository(@NonNull final BoardGamesDataSource boardGamesDataSource,
+                                @NonNull final RecentBoardGamesDataSource recentBoardGamesDataSource,
+                                @NonNull final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource) {
         this.boardGamesDataSource = boardGamesDataSource;
+        this.recentBoardGamesDataSource = recentBoardGamesDataSource;
         this.favoriteBoardGamesDataSource = favoriteBoardGamesDataSource;
     }
 
@@ -28,7 +34,7 @@ public final class BoardGamesRepository implements BoardGamesDataSource, Favorit
     }
 
     @Override
-    public Single<BoardGame> favoriteGame(@NonNull String id) {
+    public Single<BoardGame> favoriteGame(@NonNull final String id) {
         return favoriteBoardGamesDataSource.favoriteGame(id);
     }
 
@@ -60,6 +66,21 @@ public final class BoardGamesRepository implements BoardGamesDataSource, Favorit
     public Single<Boolean> isFavorite(@NonNull final String id) {
         return favoriteBoardGamesDataSource.favoriteGame(id)
                 .map(game -> game != null);
+    }
+
+    @Override
+    public Single<List<RecentBoardGame>> recentGames() {
+        return recentBoardGamesDataSource.recentGames();
+    }
+
+    @Override
+    public Completable addRecentGame(@NonNull final RecentBoardGame game) {
+        return recentBoardGamesDataSource.addRecentGame(game);
+    }
+
+    @Override
+    public Completable deleteRecentGame(@NonNull final RecentBoardGame game) {
+        return recentBoardGamesDataSource.deleteRecentGame(game);
     }
 
 }
