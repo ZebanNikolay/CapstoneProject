@@ -12,7 +12,7 @@ import java.util.List;
 import io.reactivex.Single;
 
 @Dao
-public interface BoardGameDao {
+public interface FavoriteBoardGameDao {
 
     @Query("SELECT * FROM favorite")
     Single<List<BoardGame>> getAll();

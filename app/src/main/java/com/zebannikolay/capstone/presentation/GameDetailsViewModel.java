@@ -48,11 +48,18 @@ public final class GameDetailsViewModel {
         interactor.game(gameId)
                 .subscribe(game -> {
                     this.game.setValue(game);
+                    updateRecent(game);
                     uiState.setValue(UiState.CONTENT);
                 }, t -> {
                     Timber.e(t);
                     uiState.setValue(UiState.FAIL);
                 });
+    }
+
+    @SuppressLint("CheckResult")
+    public void updateRecent(@NonNull final BoardGame game) {
+        interactor.addRecentGame(game)
+                .subscribe(() -> {}, Timber::e);
     }
 
     public void onPlayReview(@NonNull final String videoId) {

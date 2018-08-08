@@ -28,4 +28,8 @@ public interface BoardGamesInteractor {
 
     Single<Boolean> isFavorite(@NonNull final String id);
 
+    Single<List<BoardGamePreview>> recentGames();
+
+    Completable addRecentGame(@NonNull final BoardGame game);
+
 }

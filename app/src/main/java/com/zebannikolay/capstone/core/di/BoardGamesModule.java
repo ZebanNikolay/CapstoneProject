@@ -7,10 +7,13 @@ import android.support.annotation.NonNull;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.zebannikolay.capstone.data.BoardGamesRepository;
-import com.zebannikolay.capstone.data.local.BoardGameDao;
+import com.zebannikolay.capstone.data.local.FavoriteBoardGameDao;
 import com.zebannikolay.capstone.data.local.BoardGameDataBase;
 import com.zebannikolay.capstone.data.local.FavoriteBoardGamesDataSource;
 import com.zebannikolay.capstone.data.local.FavoriteBoardGamesDataSourceImpl;
+import com.zebannikolay.capstone.data.local.RecentBoardGameDao;
+import com.zebannikolay.capstone.data.local.RecentBoardGamesDataSource;
+import com.zebannikolay.capstone.data.local.RecentBoardGamesDataSourceImpl;
 import com.zebannikolay.capstone.data.remote.BoardGamesDataSource;
 import com.zebannikolay.capstone.data.remote.BoardGamesDataSourceImpl;
 import com.zebannikolay.capstone.domain.BoardGamesInteractor;
@@ -34,8 +37,10 @@ public class BoardGamesModule {
 
     @Singleton
     @Provides
-    public BoardGamesRepository provideBoardGameRepository(@NonNull final BoardGamesDataSource boardGamesDataSource, @NonNull final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource) {
-        return new BoardGamesRepository(boardGamesDataSource, favoriteBoardGamesDataSource);
+    public BoardGamesRepository provideBoardGameRepository(@NonNull final BoardGamesDataSource boardGamesDataSource,
+                                                           @NonNull final RecentBoardGamesDataSource recentBoardGamesDataSource,
+                                                           @NonNull final FavoriteBoardGamesDataSource favoriteBoardGamesDataSource) {
+        return new BoardGamesRepository(boardGamesDataSource, recentBoardGamesDataSource, favoriteBoardGamesDataSource);
     }
 
     @Singleton
@@ -47,14 +52,20 @@ public class BoardGamesModule {
 
     @Singleton
     @Provides
-    public FavoriteBoardGamesDataSource provideFavoriteBoardGamesDataSource(@NonNull final BoardGameDao dataBase) {
-        return new FavoriteBoardGamesDataSourceImpl(dataBase);
+    public FavoriteBoardGamesDataSource provideFavoriteBoardGamesDataSource(@NonNull final BoardGameDataBase dataBase) {
+        return new FavoriteBoardGamesDataSourceImpl(dataBase.favoriteBoardGameDao());
     }
 
     @Singleton
     @Provides
-    public BoardGameDao provideBoardGameDataBase(@NonNull final Context context) {
+    public RecentBoardGamesDataSource provideRecentBoardGamesDataSource(@NonNull final BoardGameDataBase dataBase) {
+        return new RecentBoardGamesDataSourceImpl(dataBase.recentBoardGameDao());
+    }
+
+    @Singleton
+    @Provides
+    public BoardGameDataBase provideBoardGameDataBase(@NonNull final Context context) {
         return Room.databaseBuilder(context,
-                BoardGameDataBase.class, "boardGameDataBase").build().boardGameDao();
+                BoardGameDataBase.class, "boardGameDataBase").build();
     }
 }
