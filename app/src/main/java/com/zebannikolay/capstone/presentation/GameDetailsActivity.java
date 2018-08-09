@@ -1,6 +1,8 @@
 package com.zebannikolay.capstone.presentation;
 
+import android.appwidget.AppWidgetManager;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -11,11 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 import com.zebannikolay.capstone.App;
 import com.zebannikolay.capstone.R;
 import com.zebannikolay.capstone.databinding.ActivityGameDetailBinding;
 import com.zebannikolay.capstone.domain.BoardGamesInteractor;
+import com.zebannikolay.capstone.domain.models.BoardGame;
 
 import javax.inject.Inject;
 
@@ -23,7 +25,7 @@ import timber.log.Timber;
 
 public class GameDetailsActivity extends AppCompatActivity {
 
-    private static final String EXTRA_GAME_ID = GameDetailsActivity.class.getSimpleName() + "extra_game_id";
+    public static final String EXTRA_GAME_ID = GameDetailsActivity.class.getSimpleName() + "extra_game_id";
     private ActivityGameDetailBinding binding;
     @Inject BoardGamesInteractor interactor;
     private GameDetailsViewModel viewModel;
@@ -52,7 +54,16 @@ public class GameDetailsActivity extends AppCompatActivity {
     private void subscribeViewModel() {
         viewModel.getPlayReviewEvent().observe(this, this::openYouTubeVideo);
         viewModel.getOpenRulesEvent().observe(this, this::openRules);
+        viewModel.getGame().observe(this, this::updateBakingWidget);
     }
+
+
+    private void updateBakingWidget(@NonNull final BoardGame game) {
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
+        int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this, BoardGameWidget.class));
+        BoardGameWidget.updateBoardGameWidgets(this, widgetManager, appWidgetIds, game);
+    }
+
 
     private String getGameId() {
         Intent intent = getIntent();
