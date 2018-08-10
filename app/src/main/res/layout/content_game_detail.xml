@@ -30,7 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_small"
+                android:paddingBottom="@dimen/spacing_small"
+                android:paddingStart="@dimen/vertical_margin"
+                android:paddingEnd="@dimen/vertical_margin"
                 app:visible="@{viewModel.uiState == UiState.CONTENT}"
                 tools:visibility="gone">
 
