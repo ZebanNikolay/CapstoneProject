@@ -2,6 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('board_game_key.jks')
+            storePassword "secret"
+            keyAlias 'board_game'
+            keyPassword "secret"
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.zebannikolay.capstone"
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
