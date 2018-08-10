@@ -4,7 +4,7 @@
 
     <string name="error_an_error_occurred">An error occurred</string>
 
-    <string name="nav_bottom_title_search">Search</string>
+    <string name="nav_bottom_title_home">Home</string>
     <string name="nav_bottom_title_recent">Recent</string>
     <string name="nav_bottom_title_favorite">Favorite</string>
     <string name="title_activity_game_detail">Game Detail</string>

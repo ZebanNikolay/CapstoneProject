@@ -1,5 +1,7 @@
 package com.zebannikolay.capstone.presentation;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.navigation_search:
+            case R.id.navigation_home:
                 binding.viewPager.setCurrentItem(0);
                 return true;
             case R.id.navigation_recent:
