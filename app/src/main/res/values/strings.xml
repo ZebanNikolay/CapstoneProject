@@ -16,4 +16,8 @@
     <string name="label_rules">Rules</string>
     <string name="label_review">Review</string>
     <string name="download_rules">Download</string>
+    <string name="content_description_play_icon">play icon</string>
+    <string name="content_description_favorite_button_icon">favorite button icon</string>
+    <string name="content_description_video_thumbnail">video thumbnail</string>
+    <string name="content_description_add_to_favorite_button">add to favorite button</string>
 </resources>

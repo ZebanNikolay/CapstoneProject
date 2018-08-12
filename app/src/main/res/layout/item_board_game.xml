@@ -61,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_small"
                 android:src="@{item.favorite ? @drawable/ic_favorite : @drawable/ic_favorite_border}"
+                android:contentDescription="@string/content_description_favorite_button_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/title"

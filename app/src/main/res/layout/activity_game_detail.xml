@@ -157,6 +157,7 @@
                                 android:layout_margin="@dimen/spacing_large"
                                 android:drawablePadding="@dimen/spacing_small"
                                 android:drawableStart="@drawable/ic_file_download"
+                                android:contentDescription="@string/download_rules"
                                 android:onClick="@{() -> viewModel.onDownloadRules(viewModel.game.rulesUrl)}"
                                 android:text="@string/download_rules" />
 
@@ -197,6 +198,7 @@
                                     android:layout_height="@dimen/youtoube_thumb_height"
                                     android:scaleType="centerCrop"
                                     app:youtubeImage="@{viewModel.game.videoUrl}"
+                                    android:contentDescription="@{viewModel.game.title}"
                                     tools:src="@tools:sample/avatars" />
 
                                 <ImageView
@@ -204,6 +206,7 @@
                                     android:layout_height="72dp"
                                     android:layout_gravity="center"
                                     android:src="@drawable/ic_play_circle"
+                                    android:contentDescription="@string/content_description_play_icon"
                                     android:tint="@color/colorAccent" />
                             </FrameLayout>
 
@@ -227,6 +230,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/vertical_margin"
             android:onClick="@{() -> viewModel.onFavoriteClick()}"
+            android:contentDescription="@string/content_description_add_to_favorite_button"
             android:tint="@color/secondaryTextColor"
             app:layout_anchor="@id/app_bar"
             app:layout_anchorGravity="bottom|end"
