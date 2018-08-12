@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
@@ -26,6 +27,7 @@ import timber.log.Timber;
 public class GameDetailsActivity extends AppCompatActivity {
 
     public static final String EXTRA_GAME_ID = GameDetailsActivity.class.getSimpleName() + "extra_game_id";
+    private static final String SCROLL_POSITION = "SCROLL_POSITION";
     private ActivityGameDetailBinding binding;
     @Inject BoardGamesInteractor interactor;
     private GameDetailsViewModel viewModel;
@@ -44,6 +46,15 @@ public class GameDetailsActivity extends AppCompatActivity {
         viewModel = new GameDetailsViewModel(interactor, getGameId());
         binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);
+
+        if (savedInstanceState != null) {
+
+            final int[] position = savedInstanceState.getIntArray(SCROLL_POSITION);
+            if (position != null) {
+                binding.scrollView.post(() -> binding.scrollView.scrollTo(position[0], position[1]));
+            }
+        }
+
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -86,5 +97,22 @@ public class GameDetailsActivity extends AppCompatActivity {
                     startActivity(browserIntent);
                 })
                 .addOnFailureListener(Timber::e);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        final int[] position = savedInstanceState.getIntArray(SCROLL_POSITION);
+        if (position != null) {
+            binding.scrollView.postDelayed(() -> binding.scrollView.scrollTo(position[0], position[1]), 500);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray(SCROLL_POSITION,
+                new int[]{binding.scrollView.getScrollX(), binding.scrollView.getScrollY()});
     }
 }
