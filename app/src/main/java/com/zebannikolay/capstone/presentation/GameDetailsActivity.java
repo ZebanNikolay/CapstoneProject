@@ -1,5 +1,7 @@
 package com.zebannikolay.capstone.presentation;
 
+import android.Manifest;
+import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -7,18 +9,31 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.single.BasePermissionListener;
 import com.zebannikolay.capstone.App;
 import com.zebannikolay.capstone.R;
 import com.zebannikolay.capstone.databinding.ActivityGameDetailBinding;
 import com.zebannikolay.capstone.domain.BoardGamesInteractor;
 import com.zebannikolay.capstone.domain.models.BoardGame;
+
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 import javax.inject.Inject;
 
@@ -93,8 +108,19 @@ public class GameDetailsActivity extends AppCompatActivity {
         final StorageReference loadRef = FirebaseStorage.getInstance().getReference().child("rules/" + rulesUrl);
         loadRef.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(browserIntent);
+                    Dexter.withActivity(GameDetailsActivity.this)
+                            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            .withListener(new BasePermissionListener() {
+                                @Override
+                                public void onPermissionGranted(PermissionGrantedResponse response) {
+                                    new DownloadFileFromURL().execute(uri.toString(), rulesUrl);
+                                }
+
+                                @Override
+                                public void onPermissionDenied(PermissionDeniedResponse response) {
+                                    Toast.makeText(GameDetailsActivity.this, getString(R.string.write_external_storage_error), Toast.LENGTH_SHORT).show();
+                                }
+                            }).check();
                 })
                 .addOnFailureListener(Timber::e);
     }
@@ -114,5 +140,63 @@ public class GameDetailsActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putIntArray(SCROLL_POSITION,
                 new int[]{binding.scrollView.getScrollX(), binding.scrollView.getScrollY()});
+    }
+
+    private class DownloadFileFromURL extends AsyncTask<String, String, String> {
+
+        private ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            System.out.println("Starting download");
+
+            dialog = new ProgressDialog(GameDetailsActivity.this);
+            dialog.setMessage("Loading... Please wait...");
+            dialog.setIndeterminate(false);
+            dialog.setCancelable(false);
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... f_url) {
+            int count;
+            final String path = Environment.getExternalStorageDirectory().toString() + "/Download/" + f_url[1];
+            try {
+
+                final URL url = new URL(f_url[0]);
+
+                final URLConnection conection = url.openConnection();
+                conection.connect();
+
+                final InputStream input = new BufferedInputStream(url.openStream(), 8192);
+                final OutputStream output = new FileOutputStream(path);
+                final byte data[] = new byte[1024];
+
+                while ((count = input.read(data)) != -1) {
+                    output.write(data, 0, count);
+                }
+
+                output.flush();
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                Timber.e(e.getMessage());
+            }
+
+            return path;
+        }
+
+
+        /**
+         * After completing background task
+         **/
+        @Override
+        protected void onPostExecute(String file_url) {
+            dialog.dismiss();
+            Toast.makeText(GameDetailsActivity.this, "File downloaded: " + file_url, Toast.LENGTH_LONG).show();
+        }
+
     }
 }
